@@ -4,17 +4,22 @@ import { List } from "semantic-ui-react";
 
 export interface ParameterNodeProps {
   node: TreeNode;
+  parentPath?: string;
 }
 
 export const ParameterNode: React.FunctionComponent<ParameterNodeProps> = ({
   node,
+  parentPath,
 }) => {
+  const fullPath = parentPath ? parentPath + node.path + "/" : node.path;
+
   return (
-    <List>
-      <List.Item>
-        <List.Icon name="folder" />
+    <List.Item>
+      <List.Icon name="folder" />
+      <List.Content>
+        <List.Header>{node.path}</List.Header>
+        <List.Description>{fullPath}</List.Description>
         <List.List>
-          <List.Header>{node.path}</List.Header>
           {Object.entries(node.children).map(([path, childNode]) => (
             <>
               {childNode.parameter && (
@@ -29,12 +34,16 @@ export const ParameterNode: React.FunctionComponent<ParameterNodeProps> = ({
                 </List.Item>
               )}
               {Object.keys(childNode.children).length >= 1 && (
-                <ParameterNode key={path} node={childNode} />
+                <ParameterNode
+                  key={path}
+                  node={childNode}
+                  parentPath={fullPath}
+                />
               )}
             </>
           ))}
         </List.List>
-      </List.Item>
-    </List>
+      </List.Content>
+    </List.Item>
   );
 };

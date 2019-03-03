@@ -5,6 +5,7 @@ import { MenuItem } from "./MenuItem";
 import styles from "./App.module.scss";
 import "./parameters";
 import { ParameterTree } from "./ParameterTree";
+import { Setup } from "./Setup";
 
 class App extends Component {
   render() {
@@ -23,14 +24,14 @@ class App extends Component {
                 <Grid.Column>
                   <Menu>
                     <MenuItem path="/" exactMatch name="Home" />
-                    <MenuItem path="/away" name="Away" />
+                    <MenuItem path="/setup" name="Setup" />
                   </Menu>
                 </Grid.Column>
               </Grid.Row>
             </Grid>
 
             <Route exact path="/" component={() => <ParameterTree />} />
-            <Route exact path="/away" component={() => <span>Away</span>} />
+            <Route exact path="/setup" component={() => <Setup />} />
           </Container>
         </>
       </BrowserRouter>

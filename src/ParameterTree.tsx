@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getParameters, TreeNode, treeParameters } from "./parameters";
-import { Dimmer, List, Loader, Message } from "semantic-ui-react";
+import { Dimmer, Grid, List, Loader, Message } from "semantic-ui-react";
 import { ParameterNode } from "./ParameterNode";
 
 const EXAMPLE_PARAMS: typeof getParameters = (_path: string) =>
@@ -71,7 +71,7 @@ const EXAMPLE_PARAMS: typeof getParameters = (_path: string) =>
               "arn:aws:ssm:eu-west-1:000000000001:parameter/root-string-param2",
           },
         ]),
-      3500
+      1500
     );
   });
 
@@ -87,7 +87,7 @@ export const ParameterTree: React.FunctionComponent<{}> = () => {
         setTree(treeParameters(params));
       })
       .catch(setError);
-  });
+  }, []);
 
   if (error) {
     return (
@@ -103,8 +103,18 @@ export const ParameterTree: React.FunctionComponent<{}> = () => {
       </Dimmer>
     );
   } else if (tree) {
-    return <ParameterNode node={tree} />;
+    return (
+      <Grid>
+        <Grid.Row>
+          <Grid.Column>
+            <List>
+              <ParameterNode node={tree} />
+            </List>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    );
   } else {
-    return (<span>Boo</span>)
+    return <span>Boo</span>;
   }
 };

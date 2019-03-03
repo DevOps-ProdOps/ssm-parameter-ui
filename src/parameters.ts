@@ -1,13 +1,13 @@
 import { SSM } from "aws-sdk";
+import { CONFIG_KEY } from "./Setup";
 
 const getParametersInternal = async (
   path: string,
   nextToken?: string
 ): Promise<SSM.ParameterList> => {
-  const ssmClient = new SSM({
-    region: "eu-west-1",
-    credentials: JSON.parse(localStorage.getItem("credentials") || "{}"),
-  });
+  const ssmClient = new SSM(
+    JSON.parse(localStorage.getItem(CONFIG_KEY) || "{}")
+  );
 
   const params = await ssmClient
     .getParametersByPath({
