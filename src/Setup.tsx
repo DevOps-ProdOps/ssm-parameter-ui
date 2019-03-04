@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Form, Grid } from "semantic-ui-react";
 import { ConfigurationOptions } from "aws-sdk/lib/config";
+import styles from "./Setup.module.scss";
 
 const DEFAULT_OPTIONS: ConfigurationOptions = {
   region: "eu-west-1",
@@ -35,6 +36,7 @@ export const Setup: React.FunctionComponent<{}> = () => {
             }}
           >
             <Form.TextArea
+              className={styles.options}
               label="Options"
               name="options"
               value={options}

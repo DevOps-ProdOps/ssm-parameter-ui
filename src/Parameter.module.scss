@@ -1,0 +1,40 @@
+.parameter {
+  //background: darkviolet;
+  //width: 100% !important;
+
+  .header {
+    //width: 100%;
+
+    span.parameterType {
+      margin-left: 0.5rem;
+    }
+  }
+
+  //.content {
+  //  width: 100%;
+  //}
+
+  .controls {
+    transition: opacity 0.2s ease-in-out;
+    opacity: 0;
+    position: absolute;
+    margin: 0 0 0 -6.5rem;
+    padding: 1rem 1rem 1rem 0;
+    //background: violet;
+  }
+
+  &:hover {
+    .header .path, .description pre {
+      color: #8f30bf;
+    }
+
+    .controls {
+      opacity: 1;
+    }
+  }
+}
+
+//.controls {
+//  margin-left: 1rem;
+//  display: inline-block;
+//}

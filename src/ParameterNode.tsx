@@ -1,6 +1,7 @@
 import React from "react";
 import { TreeNode } from "./parameters";
 import { List } from "semantic-ui-react";
+import { Parameter } from "./Parameter";
 
 export interface ParameterNodeProps {
   node: TreeNode;
@@ -21,17 +22,9 @@ export const ParameterNode: React.FunctionComponent<ParameterNodeProps> = ({
         <List.Description>{fullPath}</List.Description>
         <List.List>
           {Object.entries(node.children).map(([path, childNode]) => (
-            <>
+            <React.Fragment key={path}>
               {childNode.parameter && (
-                <List.Item>
-                  <List.Icon name="file" />
-                  <List.Content>
-                    <List.Header>{childNode.path}</List.Header>
-                    <List.Description>
-                      {childNode.parameter.Value} ({childNode.parameter.Type})
-                    </List.Description>
-                  </List.Content>
-                </List.Item>
+                <Parameter childNode={childNode} />
               )}
               {Object.keys(childNode.children).length >= 1 && (
                 <ParameterNode
@@ -40,7 +33,7 @@ export const ParameterNode: React.FunctionComponent<ParameterNodeProps> = ({
                   parentPath={fullPath}
                 />
               )}
-            </>
+            </React.Fragment>
           ))}
         </List.List>
       </List.Content>

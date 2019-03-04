@@ -106,8 +106,8 @@ export const ParameterTree: React.FunctionComponent<{}> = () => {
     return (
       <Grid>
         <Grid.Row>
-          <Grid.Column>
-            <List>
+          <Grid.Column width={16}>
+            <List size="large">
               <ParameterNode node={tree} />
             </List>
           </Grid.Column>
