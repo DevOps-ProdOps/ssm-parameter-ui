@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Label } from "semantic-ui-react";
 import { TreeNode } from "./parameters";
 import styles from "./Parameter.module.scss";
+import { EditModal } from "./EditModal";
 
 interface ParameterProps {
   childNode: TreeNode;
@@ -22,7 +23,9 @@ export const Parameter: React.FunctionComponent<ParameterProps> = ({
       />
 
       <Button.Group className={styles.controls}>
-        <Button icon="pencil" className={styles.editButton} />
+        <EditModal parameter={childNode.parameter}>
+          <Button icon="pencil" className={styles.editButton} />
+        </EditModal>
         <Button icon="trash" className={styles.deleteButton} />
       </Button.Group>
     </div>
