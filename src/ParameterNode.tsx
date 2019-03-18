@@ -1,7 +1,9 @@
 import React from "react";
 import { TreeNode } from "./parameters";
-import { List } from "semantic-ui-react";
+import { Icon } from "semantic-ui-react";
 import { Parameter } from "./Parameter";
+import styles from "./ParameterNode.module.scss";
+import * as _ from "lodash";
 
 export interface ParameterNodeProps {
   node: TreeNode;
@@ -15,17 +17,33 @@ export const ParameterNode: React.FunctionComponent<ParameterNodeProps> = ({
   const fullPath = parentPath ? parentPath + node.path + "/" : node.path;
 
   return (
-    <List.Item>
-      <List.Icon name="folder" />
-      <List.Content>
-        <List.Header>{node.path}</List.Header>
-        <List.Description>{fullPath}</List.Description>
-        <List.List>
-          {Object.entries(node.children).map(([path, childNode]) => (
+    <div className={styles.parameterNode}>
+      <div className={styles.header}>
+        <Icon name="folder" />
+
+        <div className={styles.info}>
+          <div className={styles.name}>{node.path}</div>
+          <div className={styles.description}>{fullPath}</div>
+        </div>
+      </div>
+
+      <div className={styles.children}>
+        {_.map(
+          _.orderBy(
+            node.children,
+            c => {
+              // Show parameters before folders (prioritise params with a _)
+              if (Object.keys(c.children).length >= 1) {
+                return c.path;
+              } else {
+                return `_${c.path}`;
+              }
+            },
+            "asc"
+          ),
+          (childNode, path) => (
             <React.Fragment key={path}>
-              {childNode.parameter && (
-                <Parameter childNode={childNode} />
-              )}
+              {childNode.parameter && <Parameter childNode={childNode} />}
               {Object.keys(childNode.children).length >= 1 && (
                 <ParameterNode
                   key={path}
@@ -34,9 +52,9 @@ export const ParameterNode: React.FunctionComponent<ParameterNodeProps> = ({
                 />
               )}
             </React.Fragment>
-          ))}
-        </List.List>
-      </List.Content>
-    </List.Item>
+          )
+        )}
+      </div>
+    </div>
   );
 };

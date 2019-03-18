@@ -1,40 +1,50 @@
+$buttonGreen: rgba(0, 101, 46, 0.4);
+$buttonRed: #ff5d6a;
+
 .parameter {
-  //background: darkviolet;
-  //width: 100% !important;
+  margin: 0 0 1rem 0;
+  padding: 1rem;
+  border: dashed 0.1rem #eee;
 
   .header {
-    //width: 100%;
-
     span.parameterType {
       margin-left: 0.5rem;
     }
   }
 
-  //.content {
-  //  width: 100%;
-  //}
-
   .controls {
     transition: opacity 0.2s ease-in-out;
-    opacity: 0;
+    opacity: 0.4;
     position: absolute;
-    margin: 0 0 0 -6.5rem;
-    padding: 1rem 1rem 1rem 0;
-    //background: violet;
+    margin: 0 0 -1rem 0;
+    padding: 0.4rem 0 0 0.5rem;
+    right: 2rem;
   }
 
   &:hover {
-    .header .path, .description pre {
-      color: #8f30bf;
-    }
-
+    background: rgba(0, 101, 46, 0.2);
     .controls {
       opacity: 1;
     }
+
+    .editButton {
+      background: $buttonGreen;
+
+      &:hover {
+        background: lighten($buttonGreen, 10%);
+      }
+    }
+
+    .deleteButton {
+      background: $buttonRed;
+
+      &:hover {
+        background: lighten($buttonRed, 10%);
+      }
+    }
+  }
+
+  pre {
+    margin: 0;
   }
 }
-
-//.controls {
-//  margin-left: 1rem;
-//  display: inline-block;
-//}
