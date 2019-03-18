@@ -5,6 +5,7 @@ $buttonRed: #ff5d6a;
   margin: 0 0 1rem 0;
   padding: 1rem;
   border: dashed 0.1rem #eee;
+  transition: background 0.1s ease;
 
   .header {
     span.parameterType {
@@ -13,7 +14,6 @@ $buttonRed: #ff5d6a;
   }
 
   .controls {
-    transition: opacity 0.2s ease-in-out;
     opacity: 0.4;
     position: absolute;
     margin: 0 0 -1rem 0;
