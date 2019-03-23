@@ -20,3 +20,12 @@
   border-style: dotted;
   border-color: #666;
 }
+
+.controls {
+  position: absolute;
+  //margin: 0 0 -1rem 0;
+  padding: 0.1rem 0 0 0; // 0.5rem;
+  right: 2rem;
+}
+
+.createButton {}

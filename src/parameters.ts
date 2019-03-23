@@ -1,4 +1,4 @@
-import { SSM } from "aws-sdk";
+import { AWSError, Request, SSM } from "aws-sdk";
 import { CONFIG_KEY } from "./Setup";
 
 const getParametersInternal = async (
@@ -101,4 +101,14 @@ export const treeParameters = (parameters: SSM.ParameterList): TreeNode => {
   });
 
   return TreeNode;
+};
+
+export const putParameter = async (
+  params: SSM.Types.PutParameterRequest
+): Promise<SSM.Types.PutParameterResult> => {
+  const ssmClient = new SSM(
+    JSON.parse(localStorage.getItem(CONFIG_KEY) || "{}")
+  );
+
+  return ssmClient.putParameter(params).promise();
 };

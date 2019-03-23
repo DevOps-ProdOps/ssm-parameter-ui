@@ -31,8 +31,13 @@ export const Setup: React.FunctionComponent<{}> = () => {
         <Grid.Column>
           <Form
             onSubmit={() => {
-              localStorage.setItem(CONFIG_KEY, JSON.stringify(options));
-              setOptions(JSON.stringify(options, null, 2));
+              const restringifyed = JSON.stringify(
+                JSON.parse(options),
+                null,
+                2
+              );
+              localStorage.setItem(CONFIG_KEY, restringifyed);
+              setOptions(restringifyed);
             }}
           >
             <Form.TextArea
@@ -40,6 +45,7 @@ export const Setup: React.FunctionComponent<{}> = () => {
               label="Options"
               name="options"
               value={options}
+              onChange={e => setOptions((e.target as any).value)}
               rows={10}
             />
             <Form.Button>Save</Form.Button>

@@ -1,9 +1,10 @@
 import React from "react";
 import { TreeNode } from "./parameters";
-import { Icon } from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
 import { Parameter } from "./Parameter";
 import styles from "./ParameterNode.module.scss";
 import * as _ from "lodash";
+import { EditModal } from "./EditModal";
 
 export interface ParameterNodeProps {
   node: TreeNode;
@@ -25,6 +26,12 @@ export const ParameterNode: React.FunctionComponent<ParameterNodeProps> = ({
           <div className={styles.name}>{node.path}</div>
           <div className={styles.description}>{fullPath}</div>
         </div>
+
+        <Button.Group className={styles.controls}>
+          <EditModal path={fullPath}>
+            <Button icon="plus" className={styles.createButton} />
+          </EditModal>
+        </Button.Group>
       </div>
 
       <div className={styles.children}>
