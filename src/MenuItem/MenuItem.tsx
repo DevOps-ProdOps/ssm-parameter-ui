@@ -15,11 +15,11 @@ const UnwrappedMenuItem: React.FunctionComponent<MenuItemProps> = ({
   name,
   path,
   exactMatch,
-  location
+  location,
 }) => {
   const match = matchPath(location.pathname, {
     exact: exactMatch,
-    path
+    path,
   });
 
   return (

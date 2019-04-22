@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getParameters, TreeNode, treeParameters } from "../services/parameters";
+import {
+  getParameters,
+  TreeNode,
+  treeParameters,
+} from "../services/parameters";
 import { Dimmer, Grid, List, Loader, Message } from "semantic-ui-react";
 import { ParameterNode } from "../ParameterNode/ParameterNode";
 

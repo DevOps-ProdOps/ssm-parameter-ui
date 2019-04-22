@@ -35,7 +35,9 @@ export const EditModal: React.FunctionComponent<EditModalProps> = ({
     <Modal
       open={open}
       onClose={() => setOpen(false)}
-      trigger={React.cloneElement(children as any, { onClick: () => setOpen(true) })}
+      trigger={React.cloneElement(children as any, {
+        onClick: () => setOpen(true),
+      })}
     >
       <Modal.Header>{parameter ? "Update" : "Create"} parameter</Modal.Header>
       <Modal.Content>
