@@ -6,45 +6,57 @@ import {
 } from "../services/parameters";
 import { Dimmer, Grid, List, Loader, Message } from "semantic-ui-react";
 import { ParameterNode } from "../ParameterNode/ParameterNode";
+import { hasErrored, isLoading, Loadable } from "../state/reducer";
 
-export const ParameterTree: React.FunctionComponent<{}> = () => {
-  const [tree, setTree] = useState<TreeNode | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+export type ParameterTreeProps = {};
+
+type ConnectedParameterTreeProps = ParameterTreeProps &
+  Loadable<TreeNode> & {
+    load: () => void;
+  };
+
+export const ParameterTree: React.FunctionComponent<
+  ConnectedParameterTreeProps
+> = props => {
+  // const [tree, setTree] = useState<TreeNode | null>(null);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState<Error | null>(null);
+
+  // useEffect(() => {
+  //   getParameters("/")
+  //     .then(params => {
+  //       setLoading(false);
+  //       setTree(treeParameters(params));
+  //     })
+  //     .catch(setError);
+  // }, []);
 
   useEffect(() => {
-    getParameters("/")
-      .then(params => {
-        setLoading(false);
-        setTree(treeParameters(params));
-      })
-      .catch(setError);
+    props.load();
   }, []);
 
-  if (error) {
+  if (hasErrored(props)) {
     return (
       <Message negative>
         <Message.Header>Failed to load parameters.</Message.Header>
-        <pre>{error.stack}</pre>
+        <pre>{props.error.stack}</pre>
       </Message>
     );
-  } else if (loading) {
+  } else if (isLoading(props)) {
     return (
       <Dimmer active>
         <Loader size="massive">Loading</Loader>
       </Dimmer>
     );
-  } else if (tree) {
+  } else {
     return (
       <Grid>
         <Grid.Row>
           <Grid.Column width={16}>
-            <ParameterNode node={tree} />
+            <ParameterNode node={props.value} />
           </Grid.Column>
         </Grid.Row>
       </Grid>
     );
-  } else {
-    return <span>Boo</span>;
   }
 };
