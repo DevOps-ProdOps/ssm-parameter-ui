@@ -1,10 +1,10 @@
 import React from "react";
-import { TreeNode } from "./parameters";
+import { TreeNode } from "../services/parameters";
 import { Button, Icon } from "semantic-ui-react";
-import { Parameter } from "./Parameter";
+import { Parameter } from "../Parameter/Parameter";
 import styles from "./ParameterNode.module.scss";
 import * as _ from "lodash";
-import { EditModal } from "./EditModal";
+import { EditModal } from "../EditModal/EditModal";
 
 export interface ParameterNodeProps {
   node: TreeNode;

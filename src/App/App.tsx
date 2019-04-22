@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 import { Container, Grid, Header, Menu } from "semantic-ui-react";
-import { MenuItem } from "./MenuItem";
+import { MenuItem } from "../MenuItem/MenuItem";
 import styles from "./App.module.scss";
-import "./parameters";
-import { ParameterTree } from "./ParameterTree";
-import { Setup } from "./Setup";
+import "../services/parameters";
+import { ParameterTree } from "../ParameterTree";
+import { Setup } from "../Setup";
 
 class App extends Component {
   render() {

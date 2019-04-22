@@ -1,5 +1,5 @@
 import { AWSError, Request, SSM } from "aws-sdk";
-import { CONFIG_KEY } from "./Setup";
+import { CONFIG_KEY } from "../Setup/Setup";
 
 const getParametersInternal = async (
   path: string,

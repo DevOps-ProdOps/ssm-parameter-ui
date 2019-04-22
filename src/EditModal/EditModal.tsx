@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Form, Button, Select, Message } from "semantic-ui-react";
 import { AWSError, Request, SSM } from "aws-sdk";
-import { putParameter as ssmPutParameter } from "./parameters";
+import { putParameter as ssmPutParameter } from "../services/parameters";
 
 interface EditModalProps {
   children: React.ReactNode;
