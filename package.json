@@ -59,5 +59,8 @@
     "singleQuote": false,
     "trailingComma": "es5"
   },
-  "homepage": "http://jsherz.github.io/ssm-parameter-ui"
+  "homepage": "http://jsherz.github.io/ssm-parameter-ui",
+  "engines": {
+    "node": "10"
+  }
 }
