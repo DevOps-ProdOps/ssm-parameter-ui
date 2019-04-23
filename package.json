@@ -28,7 +28,7 @@
     "eject": "react-scripts eject",
     "prettify": "prettier --write 'src/**/*.tsx'",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "coveralls": "cat coverage/lcov.info | coveralls"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,9 +46,9 @@
     "@types/react-redux": "6",
     "@types/react-router-dom": "^4.3.1",
     "@types/recompose": "^0.30.5",
+    "coveralls": "^3.0.3",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
-    "gh-pages": "^2.0.1",
     "jest-enzyme": "^7.0.2",
     "prettier": "^1.16.4",
     "tslint": "^5.13.1"
@@ -57,5 +57,8 @@
     "singleQuote": false,
     "trailingComma": "es5"
   },
-  "homepage": "http://jsherz.github.io/ssm-parameter-ui"
+  "homepage": "https://ssm-parameter-ui.jsherz.com",
+  "engines": {
+    "node": "10"
+  }
 }

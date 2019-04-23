@@ -1,0 +1,23 @@
+language: node_js
+
+node_js:
+  - lts/dubnium
+
+stages:
+  - build
+  - name: deploy
+    if: branch = master
+
+jobs:
+  include:
+    - stage: build
+      name: "Test, lint & build"
+      script: |
+        yarn lint
+        yarn test --coverage
+        yarn build
+
+    - stage: deploy
+      name: "Deploy"
+      script: |
+        yarn coveralls
