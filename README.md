@@ -1,44 +1,40 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ssm-parameter-ui
 
-## Available Scripts
+[![Build Status](https://travis-ci.org/jSherz/ssm-parameter-ui.svg?branch=master)](https://travis-ci.org/jSherz/ssm-parameter-ui)
+[![Coverage Status](https://coveralls.io/repos/github/jSherz/ssm-parameter-ui/badge.svg?branch=master)](https://coveralls.io/github/jSherz/ssm-parameter-ui?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/jSherz/ssm-parameter-ui/badge.svg)](https://snyk.io/test/github/jSherz}/ssm-parameter-ui)
 
-In the project directory, you can run:
+This project is an attempt at making an alternative user interface for the [AWS
+Systems Manager Parameter Store]. It is in no way affiliated with, endorsed by
+or associated with Amazon or Amazon Web Services. Use it at your own risk. It's
+recommended that you download the project, review the source code and then build
+your own static copy to run locally. Alternatively, you can start using the UI
+now on the [project's GitHub pages site].
 
-### `npm start`
+[AWS Systems Manager Parameter Store]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html
+[project's GitHub pages site]: https://jsherz.github.io/ssm-parameter-ui
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**NB:** This is an extremely early stage project and thus much of the
+functionality is in development, buggy or just plain wrong. You have been
+warned.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Getting started
 
-### `npm test`
+Either clone the project and build it (see [developers-guide]) or use it at the
+[project's GitHub pages site].
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Navigate to the "Setup" page using the link in the nav bar. You will see an
+   object that's passed directly into the AWS SDK and thus takes the options
+   documented in the [SDK documentation].
+2. Adapt the default settings or replace them with different credentials (e.g.
+   after assuming an IAM role) and click "Save".
+3. Navigate to the main UI with the "Home" link in the nav bar.
 
-### `npm run build`
+[SDK documentation]: https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html
+[developers-guide]: #developers-guide
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Developer's guide
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Run the application with `yarn start`. Test it with `yarn test`, make a
+production build with `yarn build` and please normalise the formatting with
+`yarn prettify` and check the lint rules pass (`yarn lint`) before making a PR.
