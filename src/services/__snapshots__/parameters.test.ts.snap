@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`parameters treeParameters  1`] = `
+exports[`parameters treeParameters forms a tree of parameters from a flat list 1`] = `
 Object {
   "children": Object {
     "root-secure-string": Object {
@@ -67,6 +67,330 @@ Object {
                         "Name": "/services/main/primary/foo/test.json",
                         "Type": "String",
                         "Value": "test",
+                        "Version": 1,
+                      },
+                      "path": "test.json",
+                    },
+                  },
+                  "path": "foo",
+                },
+              },
+              "path": "primary",
+            },
+            "secure-db-pass": Object {
+              "children": Object {},
+              "parameter": Object {
+                "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/services/main/secure-db-pass",
+                "LastModifiedDate": 2019-03-02T17:36:51.047Z,
+                "Name": "/services/main/secure-db-pass",
+                "Type": "SecureString",
+                "Value": "foobar",
+                "Version": 1,
+              },
+              "path": "secure-db-pass",
+            },
+          },
+          "parameter": Object {
+            "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/services/main",
+            "LastModifiedDate": 2019-03-03T00:07:15.417Z,
+            "Name": "/services/main",
+            "Type": "String",
+            "Value": "hello",
+            "Version": 1,
+          },
+          "path": "main",
+        },
+      },
+      "path": "services",
+    },
+  },
+  "path": "/",
+}
+`;
+
+exports[`parameters updateTreeOfParameters updates a first level parameter 1`] = `
+Object {
+  "children": Object {
+    "root-secure-string": Object {
+      "children": Object {},
+      "parameter": Object {
+        "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/root-secure-string",
+        "LastModifiedDate": 2019-03-02T17:35:53.257Z,
+        "Name": "root-secure-string",
+        "Type": "SecureString",
+        "Value": "Test12345",
+        "Version": 1,
+      },
+      "path": "root-secure-string",
+    },
+    "root-string-param": Object {
+      "children": Object {},
+      "parameter": Object {
+        "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/root-string-param",
+        "LastModifiedDate": 2019-03-02T17:35:25.119Z,
+        "Name": "root-string-param",
+        "Type": "String",
+        "Value": "test",
+        "Version": 1,
+      },
+      "path": "root-string-param",
+    },
+    "root-string-param2": Object {
+      "children": Object {},
+      "parameter": Object {
+        "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/root-string-param2",
+        "LastModifiedDate": 2019-03-02T17:35:39.853Z,
+        "Name": "root-string-param2",
+        "Type": "SecureString",
+        "Value": "u w0t bruv",
+        "Version": 1,
+      },
+      "path": "root-string-param2",
+    },
+    "services": Object {
+      "children": Object {
+        "example-key.json": Object {
+          "children": Object {},
+          "parameter": Object {
+            "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/services/example-key.json",
+            "LastModifiedDate": 2019-03-02T17:36:11.026Z,
+            "Name": "/services/example-key.json",
+            "Type": "String",
+            "Value": "{ \\"key\\": \\"value\\" }",
+            "Version": 1,
+          },
+          "path": "example-key.json",
+        },
+        "main": Object {
+          "children": Object {
+            "primary": Object {
+              "children": Object {
+                "foo": Object {
+                  "children": Object {
+                    "test.json": Object {
+                      "children": Object {},
+                      "parameter": Object {
+                        "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/services/main/primary/foo/test.json",
+                        "LastModifiedDate": 2019-03-02T17:36:30.879Z,
+                        "Name": "/services/main/primary/foo/test.json",
+                        "Type": "String",
+                        "Value": "test",
+                        "Version": 1,
+                      },
+                      "path": "test.json",
+                    },
+                  },
+                  "path": "foo",
+                },
+              },
+              "path": "primary",
+            },
+            "secure-db-pass": Object {
+              "children": Object {},
+              "parameter": Object {
+                "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/services/main/secure-db-pass",
+                "LastModifiedDate": 2019-03-02T17:36:51.047Z,
+                "Name": "/services/main/secure-db-pass",
+                "Type": "SecureString",
+                "Value": "foobar",
+                "Version": 1,
+              },
+              "path": "secure-db-pass",
+            },
+          },
+          "parameter": Object {
+            "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/services/main",
+            "LastModifiedDate": 2019-03-03T00:07:15.417Z,
+            "Name": "/services/main",
+            "Type": "String",
+            "Value": "hello",
+            "Version": 1,
+          },
+          "path": "main",
+        },
+      },
+      "path": "services",
+    },
+  },
+  "path": "/",
+}
+`;
+
+exports[`parameters updateTreeOfParameters updates a second level parameter 1`] = `
+Object {
+  "children": Object {
+    "root-secure-string": Object {
+      "children": Object {},
+      "parameter": Object {
+        "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/root-secure-string",
+        "LastModifiedDate": 2019-03-02T17:35:53.257Z,
+        "Name": "root-secure-string",
+        "Type": "SecureString",
+        "Value": "Test12345",
+        "Version": 1,
+      },
+      "path": "root-secure-string",
+    },
+    "root-string-param": Object {
+      "children": Object {},
+      "parameter": Object {
+        "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/root-string-param",
+        "LastModifiedDate": 2019-03-02T17:35:25.119Z,
+        "Name": "root-string-param",
+        "Type": "String",
+        "Value": "test",
+        "Version": 1,
+      },
+      "path": "root-string-param",
+    },
+    "root-string-param2": Object {
+      "children": Object {},
+      "parameter": Object {
+        "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/root-string-param2",
+        "LastModifiedDate": 2019-03-02T17:35:39.853Z,
+        "Name": "root-string-param2",
+        "Type": "String",
+        "Value": "test 12345",
+        "Version": 1,
+      },
+      "path": "root-string-param2",
+    },
+    "services": Object {
+      "children": Object {
+        "example-key.json": Object {
+          "children": Object {},
+          "parameter": Object {
+            "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/services/example-key.json",
+            "LastModifiedDate": 2019-03-02T17:36:11.026Z,
+            "Name": "/services/example-key.json",
+            "Type": "BlingThing",
+            "Value": "duplicate",
+            "Version": 1,
+          },
+          "path": "example-key.json",
+        },
+        "main": Object {
+          "children": Object {
+            "primary": Object {
+              "children": Object {
+                "foo": Object {
+                  "children": Object {
+                    "test.json": Object {
+                      "children": Object {},
+                      "parameter": Object {
+                        "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/services/main/primary/foo/test.json",
+                        "LastModifiedDate": 2019-03-02T17:36:30.879Z,
+                        "Name": "/services/main/primary/foo/test.json",
+                        "Type": "String",
+                        "Value": "test",
+                        "Version": 1,
+                      },
+                      "path": "test.json",
+                    },
+                  },
+                  "path": "foo",
+                },
+              },
+              "path": "primary",
+            },
+            "secure-db-pass": Object {
+              "children": Object {},
+              "parameter": Object {
+                "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/services/main/secure-db-pass",
+                "LastModifiedDate": 2019-03-02T17:36:51.047Z,
+                "Name": "/services/main/secure-db-pass",
+                "Type": "SecureString",
+                "Value": "foobar",
+                "Version": 1,
+              },
+              "path": "secure-db-pass",
+            },
+          },
+          "parameter": Object {
+            "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/services/main",
+            "LastModifiedDate": 2019-03-03T00:07:15.417Z,
+            "Name": "/services/main",
+            "Type": "String",
+            "Value": "hello",
+            "Version": 1,
+          },
+          "path": "main",
+        },
+      },
+      "path": "services",
+    },
+  },
+  "path": "/",
+}
+`;
+
+exports[`parameters updateTreeOfParameters updates a deeply nested parameter 1`] = `
+Object {
+  "children": Object {
+    "root-secure-string": Object {
+      "children": Object {},
+      "parameter": Object {
+        "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/root-secure-string",
+        "LastModifiedDate": 2019-03-02T17:35:53.257Z,
+        "Name": "root-secure-string",
+        "Type": "SecureString",
+        "Value": "Test12345",
+        "Version": 1,
+      },
+      "path": "root-secure-string",
+    },
+    "root-string-param": Object {
+      "children": Object {},
+      "parameter": Object {
+        "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/root-string-param",
+        "LastModifiedDate": 2019-03-02T17:35:25.119Z,
+        "Name": "root-string-param",
+        "Type": "String",
+        "Value": "test",
+        "Version": 1,
+      },
+      "path": "root-string-param",
+    },
+    "root-string-param2": Object {
+      "children": Object {},
+      "parameter": Object {
+        "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/root-string-param2",
+        "LastModifiedDate": 2019-03-02T17:35:39.853Z,
+        "Name": "root-string-param2",
+        "Type": "String",
+        "Value": "test 12345",
+        "Version": 1,
+      },
+      "path": "root-string-param2",
+    },
+    "services": Object {
+      "children": Object {
+        "example-key.json": Object {
+          "children": Object {},
+          "parameter": Object {
+            "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/services/example-key.json",
+            "LastModifiedDate": 2019-03-02T17:36:11.026Z,
+            "Name": "/services/example-key.json",
+            "Type": "String",
+            "Value": "{ \\"key\\": \\"value\\" }",
+            "Version": 1,
+          },
+          "path": "example-key.json",
+        },
+        "main": Object {
+          "children": Object {
+            "primary": Object {
+              "children": Object {
+                "foo": Object {
+                  "children": Object {
+                    "test.json": Object {
+                      "children": Object {},
+                      "parameter": Object {
+                        "ARN": "arn:aws:ssm:eu-west-1:000000000001:parameter/services/main/primary/foo/test.json",
+                        "LastModifiedDate": 2019-03-02T17:36:30.879Z,
+                        "Name": "/services/main/primary/foo/test.json",
+                        "Type": "StringyThingy",
+                        "Value": "womp",
                         "Version": 1,
                       },
                       "path": "test.json",

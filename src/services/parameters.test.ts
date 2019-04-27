@@ -1,5 +1,5 @@
 import { SSM } from "aws-sdk";
-import { treeParameters } from "./parameters";
+import { treeParameters, updateTreeOfParameters } from "./parameters";
 
 const QUERY_RESULT: SSM.ParameterList = [
   {
@@ -65,8 +65,42 @@ const QUERY_RESULT: SSM.ParameterList = [
 
 describe("parameters", () => {
   describe("treeParameters", () => {
-    it("", () => {
+    it("forms a tree of parameters from a flat list", () => {
       expect(treeParameters(QUERY_RESULT)).toMatchSnapshot();
+    });
+  });
+
+  describe("updateTreeOfParameters", () => {
+    const input = treeParameters(QUERY_RESULT);
+
+    it("updates a first level parameter", () => {
+      const request: SSM.PutParameterRequest = {
+        Name: "root-string-param2",
+        Type: "SecureString",
+        Value: "u w0t bruv",
+      };
+
+      expect(updateTreeOfParameters(input, request)).toMatchSnapshot();
+    });
+
+    it("updates a second level parameter", () => {
+      const request: SSM.PutParameterRequest = {
+        Name: "/services/example-key.json",
+        Type: "BlingThing",
+        Value: "duplicate",
+      };
+
+      expect(updateTreeOfParameters(input, request)).toMatchSnapshot();
+    });
+
+    it("updates a deeply nested parameter", () => {
+      const request: SSM.PutParameterRequest = {
+        Name: "/services/main/primary/foo/test.json",
+        Type: "StringyThingy",
+        Value: "womp",
+      };
+
+      expect(updateTreeOfParameters(input, request)).toMatchSnapshot();
     });
   });
 });

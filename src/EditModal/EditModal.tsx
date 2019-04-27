@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { Modal, Form, Button, Select, Message } from "semantic-ui-react";
 import { AWSError, Request, SSM } from "aws-sdk";
-import { putParameter as ssmPutParameter } from "../services/parameters";
+import {
+  putParameter as ssmPutParameter,
+  TreeNode,
+} from "../services/parameters";
+import { hasErrored, Loadable } from "../state/reducer";
 
-interface EditModalProps {
-  children: React.ReactNode;
+export interface EditModalProps {
+  // children: React.ReactNode;
   parameter?: SSM.Parameter; // edit mode
   putParameter?: (
     params: SSM.Types.PutParameterRequest
@@ -12,11 +16,18 @@ interface EditModalProps {
   path?: string; // create mode
 }
 
-export const EditModal: React.FunctionComponent<EditModalProps> = ({
+export type ConnectedEditModalProps = EditModalProps &
+  Loadable<TreeNode> & {
+    update: (request: SSM.PutParameterRequest) => void;
+  };
+
+export const EditModal: React.FunctionComponent<ConnectedEditModalProps> = ({
   children,
   parameter,
   putParameter = ssmPutParameter,
   path,
+  update,
+  ...props
 }) => {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -28,8 +39,8 @@ export const EditModal: React.FunctionComponent<EditModalProps> = ({
   );
   const [value, setValue] = useState<string>(parameter ? parameter.Value! : "");
 
-  const [submitting, setSubmitting] = useState<boolean>(false);
-  const [error, setError] = useState<Error | null>(null);
+  // const [submitting, setSubmitting] = useState<boolean>(false);
+  // const [error, setError] = useState<Error | null>(null);
 
   return (
     <Modal
@@ -43,23 +54,14 @@ export const EditModal: React.FunctionComponent<EditModalProps> = ({
       <Modal.Content>
         <Modal.Description>
           <Form
-            onSubmit={async () => {
-              setSubmitting(true);
-
-              try {
-                await putParameter({
-                  Name: name,
-                  Type: type,
-                  Value: value,
-                  Overwrite: !!parameter,
-                });
-
-                setSubmitting(false);
-                setOpen(false);
-              } catch (err) {
-                setError(err);
-              }
-            }}
+            onSubmit={() =>
+              update({
+                Name: name,
+                Type: type,
+                Value: value,
+                Overwrite: !!parameter,
+              })
+            }
           >
             <Form.Field>
               <label>Name</label>
@@ -80,7 +82,6 @@ export const EditModal: React.FunctionComponent<EditModalProps> = ({
                   { key: "String", text: "No", value: "String" },
                 ]}
                 value={type}
-                // disabled={!!parameter}
                 onChange={(_event, { value }) => setType(value as string)}
               />
             </Form.Field>
@@ -93,13 +94,17 @@ export const EditModal: React.FunctionComponent<EditModalProps> = ({
                 onChange={e => setValue(e.target.value)}
               />
             </Form.Field>
-            {error && (
+            {hasErrored(props) && (
               <Message negative>
                 <Message.Header>Error</Message.Header>
-                <pre>{error.stack}</pre>
+                <pre>{props.error.stack}</pre>
               </Message>
             )}
-            <Button type="submit" loading={submitting} disabled={submitting}>
+            <Button
+              type="submit"
+              loading={props.loading}
+              disabled={props.loading}
+            >
               Save
             </Button>
           </Form>

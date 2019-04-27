@@ -1,5 +1,6 @@
 import { AWSError, Request, SSM } from "aws-sdk";
 import { CONFIG_KEY } from "../Setup/Setup";
+import { cloneDeep } from "lodash";
 
 const getParametersInternal = async (
   path: string,
@@ -111,4 +112,36 @@ export const putParameter = async (
   );
 
   return ssmClient.putParameter(params).promise();
+};
+
+export const updateTreeOfParameters = (
+  doNotTouchTree: TreeNode,
+  param: SSM.PutParameterRequest
+): TreeNode => {
+  const tree = cloneDeep(doNotTouchTree);
+  const nameParts = param.Name!.split("/");
+
+  // starts with a forward slash (not root param)?
+  if (nameParts[0] === "") {
+    let currentTreeTreeNode: TreeNode = tree.children[nameParts[1]];
+
+    // skip first (empty) name part and top-level key
+    for (let index = 2; index < nameParts.length; index++) {
+      currentTreeTreeNode = currentTreeTreeNode.children[nameParts[index]];
+
+      if (index === nameParts.length - 1) {
+        currentTreeTreeNode.parameter = {
+          ...currentTreeTreeNode.parameter,
+          ...param,
+        };
+      }
+    }
+  } else {
+    tree.children[nameParts[0]].parameter = {
+      ...tree.children[nameParts[0]].parameter,
+      ...param,
+    };
+  }
+
+  return tree;
 };

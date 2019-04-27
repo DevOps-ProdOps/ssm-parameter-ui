@@ -4,7 +4,7 @@ import { Button, Icon } from "semantic-ui-react";
 import { Parameter } from "../Parameter/Parameter";
 import styles from "./ParameterNode.module.scss";
 import * as _ from "lodash";
-import { EditModal } from "../EditModal/EditModal";
+import { EditModal } from "../EditModal";
 
 export interface ParameterNodeProps {
   node: TreeNode;

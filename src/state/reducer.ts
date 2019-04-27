@@ -4,7 +4,11 @@ import {
   LOAD_PARAMETERS_FAILED,
   LOAD_PARAMETERS_STARTED,
   LOAD_PARAMETERS_SUCCEEDED,
+  UPDATE_PARAMETER_FAILED,
+  UPDATE_PARAMETER_STARTED,
+  UPDATE_PARAMETER_SUCCEEDED,
 } from "./actions";
+import { updateTreeOfParameters } from "../services/parameters";
 
 export interface LoadableLoading<T> {
   loading: true;
@@ -49,11 +53,17 @@ export type Loadable<T> =
 
 export interface State {
   parameters: Loadable<any>;
+  updateParameter: Loadable<any>;
 }
 
 const INITIAL_STATE: State = {
   parameters: {
     loading: true,
+    error: null,
+    value: null,
+  },
+  updateParameter: {
+    loading: false,
     error: null,
     value: null,
   },
@@ -64,6 +74,9 @@ export const reducer: Reducer = (
   action: AppAction
 ): State => {
   switch (action.type) {
+    /*
+      Load all parameters
+     */
     case LOAD_PARAMETERS_STARTED:
       return {
         ...state,
@@ -86,6 +99,41 @@ export const reducer: Reducer = (
       return {
         ...state,
         parameters: {
+          loading: false,
+          error: action.payload,
+          value: null,
+        },
+      };
+    /*
+      Update a single parameter
+     */
+    case UPDATE_PARAMETER_STARTED:
+      return {
+        ...state,
+        updateParameter: {
+          loading: true,
+          error: null,
+          value: null,
+        },
+      };
+    case UPDATE_PARAMETER_SUCCEEDED:
+      return {
+        ...state,
+        parameters: {
+          loading: false,
+          error: null,
+          value: updateTreeOfParameters(state.parameters.value, action.payload),
+        },
+        updateParameter: {
+          loading: false,
+          error: null,
+          value: action.payload,
+        },
+      };
+    case UPDATE_PARAMETER_FAILED:
+      return {
+        ...state,
+        updateParameter: {
           loading: false,
           error: action.payload,
           value: null,

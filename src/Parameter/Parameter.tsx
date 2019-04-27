@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Label } from "semantic-ui-react";
 import { TreeNode } from "../services/parameters";
 import styles from "./Parameter.module.scss";
-import { EditModal } from "../EditModal/EditModal";
+import { EditModal } from "../EditModal";
 
 interface ParameterProps {
   childNode: TreeNode;
