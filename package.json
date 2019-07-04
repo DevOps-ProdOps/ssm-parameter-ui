@@ -19,7 +19,8 @@
     "redux-saga": "^1.0.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.85.0",
-    "typescript": "3.3.3333"
+    "typescript": "3.3.3333",
+    "snyk": "^1.189.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,7 +29,9 @@
     "eject": "react-scripts eject",
     "prettify": "prettier --write 'src/**/*.tsx'",
     "predeploy": "yarn build",
-    "coveralls": "cat coverage/lcov.info | coveralls"
+    "coveralls": "cat coverage/lcov.info | coveralls",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -60,5 +63,6 @@
   "homepage": "https://ssm-parameter-ui.jsherz.com",
   "engines": {
     "node": "10"
-  }
+  },
+  "snyk": true
 }
